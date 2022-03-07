@@ -68,7 +68,6 @@ export default class Home extends React.Component {
       .catch(error => {
         this.setState({isLoading: false});
         Alert.alert('Ops...we have a problem here!');
-        console.log('error', error);
       })
       .finally(() => {
         this.setState({isLoading: false});
@@ -77,13 +76,11 @@ export default class Home extends React.Component {
 
   filterResults = (text) => {
     const currentList = this.state.hotels
-    console.log("length", text.length)  
     let results = [];
     if(text){
       results = currentList.filter(item => item.name.includes(text))
     }
     else{
-      console.log("so clearing");
       this._clearInput();
     }
       
@@ -95,8 +92,7 @@ export default class Home extends React.Component {
     this.getData();
   }
 
-  _sortItems = (value, index) => {
-    console.log("orderBy", value)
+  _sortItems = (value) => {
     
     this.setState({order_by: value})
 
@@ -153,7 +149,6 @@ export default class Home extends React.Component {
             <SelectDropdown
               data={sort_by_options}
               onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
                 this._sortItems(selectedItem, index)
               }}
               value={order_by}
